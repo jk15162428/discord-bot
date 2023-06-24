@@ -18,6 +18,6 @@ export default command(meta, ({ interaction }) => {
 
   return interaction.reply({
     ephemeral: true,
-    content: message ?? 'Pong! 🏓'
+    content: message ?? 'Pong! :ping_pong:'
   })
 })
