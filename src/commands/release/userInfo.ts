@@ -1,8 +1,8 @@
-import { GuildMember, SlashCommandBuilder } from 'discord.js'
-import { command } from '../../utils'
+import { GuildMember, SlashCommandBuilder } from 'discord.js';
+import { command } from '../../utils';
 
 const meta = new SlashCommandBuilder()
-  .setName('user')
+  .setName('userinfo')
   .setDescription('Provides information about the user.')
 
 export default command(meta, ({ interaction }) => {

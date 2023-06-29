@@ -1,5 +1,5 @@
-import { SlashCommandBuilder, EmbedBuilder } from 'discord.js'
-import { command } from '../../utils'
+import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
+import { command } from '../../utils';
 import { request } from 'undici';
 
 const meta = new SlashCommandBuilder()

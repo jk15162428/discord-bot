@@ -1,5 +1,5 @@
-import debug from './debug'
-import release from './release'
+import debug from './debug';
+import release from './release';
 
 export default [
   debug,
