@@ -3,7 +3,7 @@ import { command } from '../../utils';
 
 const meta = new SlashCommandBuilder()
   .setName('info')
-  .setDescription('Get info about a user or a server!')
+  .setDescription('Get info about a user or a server.')
   .setDMPermission(false)
   .addSubcommand(subcommand =>
     subcommand

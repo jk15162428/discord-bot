@@ -4,7 +4,7 @@ import { request } from 'undici';
 
 const meta = new SlashCommandBuilder()
   .setName('meow')
-  .setDescription('Wanna a random cat image?.')    
+  .setDescription('Wanna a random cat image?')    
 
 export default command(meta, async ({ interaction }) => {
   await interaction.deferReply();

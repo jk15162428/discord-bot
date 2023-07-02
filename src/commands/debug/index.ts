@@ -7,4 +7,7 @@ export default category('Debug', [
   ping,
   meow,
   commands
-])
+], {
+  description: 'These commands are for developers to test the bot.',
+  emoji: '⚠️'
+})

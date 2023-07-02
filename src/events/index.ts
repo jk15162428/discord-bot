@@ -3,8 +3,8 @@ import ready from './ready'
 import interactionCreate from './interactionCreate'
 
 const events: Event<any>[] = [
+  ...interactionCreate,
   ready,
-  interactionCreate,
 ]
 
 export default events;
