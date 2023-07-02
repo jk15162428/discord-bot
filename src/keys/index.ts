@@ -7,6 +7,7 @@ config({ path: resolve(__dirname, '..', '..', '.env') })
 const keys: Keys = {
   clientToken: process.env.CLIENT_TOKEN ?? 'nil',
   serverGuild: process.env.SERVER_GUILD ?? 'nil',
+  userGuild: process.env.USER_GUILD ?? 'nil,'
 }
 
 if (Object.values(keys).includes('nil'))

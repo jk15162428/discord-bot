@@ -25,7 +25,6 @@ export default command(meta, async ({ interaction }) => {
       let guildUser: GuildMember | undefined;
       if (user) guildUser = interaction!.guild!.members.cache.get(user.id);
       else { guildUser = interaction!.member as GuildMember; user = guildUser.user }
-      console.log(typeof guildUser, guildUser)
       if (!guildUser) {
         return interaction.reply({ content: 'Cannot find user **${user}**. Something was wrong. :('})
       }
