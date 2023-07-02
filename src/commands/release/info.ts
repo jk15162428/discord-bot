@@ -4,6 +4,7 @@ import { command } from '../../utils';
 const meta = new SlashCommandBuilder()
   .setName('info')
   .setDescription('Get info about a user or a server!')
+  .setDMPermission(false)
   .addSubcommand(subcommand =>
     subcommand
       .setName('user')
@@ -13,6 +14,7 @@ const meta = new SlashCommandBuilder()
     subcommand
       .setName('server')
       .setDescription('Info about the server'));
+  
 
 export default command(meta, async ({ interaction }) => {
   switch(interaction.options.getSubcommand()) {
