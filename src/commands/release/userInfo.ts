@@ -8,7 +8,7 @@ const meta = new SlashCommandBuilder()
 export default command(meta, ({ interaction }) => {
   let member = interaction!.member as GuildMember
   return interaction.reply({
-    ephemeral: true,
+    // ephemeral: true,
     content: `This command was run by ${interaction.user.username}, who joined on ${member.joinedAt}.`
   })
 })

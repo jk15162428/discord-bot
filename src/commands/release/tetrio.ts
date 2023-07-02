@@ -5,8 +5,8 @@ import { request } from 'undici';
 // thanks for this repo: https://github.com/philippark89/Discord-Tetr.io-Bot
 
 const meta = new SlashCommandBuilder()
-  .setName('tetrio-statistics')
-  .setDescription('Display the tetr.io statistics of user.')    
+  .setName('tetrio')
+  .setDescription('Displays the tetr.io statistics of user.')    
   .addStringOption((option) =>
     option
     .setName('username')
@@ -22,7 +22,7 @@ export default command(meta, async ({ interaction }) => {
   const userResult = await request(`https://ch.tetr.io/api/users/${userName}`);
   let { success, error, data } = await userResult.body.json();
   if (!success) {
-    return interaction.editReply(`No results found for user: **${userName}**.\n Error: ${error}`);
+    return interaction.editReply(`No results found for user: **${userName}**.\nError: ${error}`);
   }
   const user = data.user;
   const permalink = `https://ch.tetr.io/u/${user.username}`
@@ -102,11 +102,11 @@ export default command(meta, async ({ interaction }) => {
     .setURL(permalink)
     .addFields(
       { name: 'Tetra League', value: `Best rank: ${bestRank}, Current rank: ${currentRank} with :globe_with_meridians: ${standingGlobal} / ${nations}: ${standingLocal}`},
-      { name: 'Statistics', value: `**PPS**: ${pps}\n **APM**: ${apm} (${efficiency})\n **VS**: ${vs}`, inline: true},
+      { name: 'Statistics', value: `**PPS**: ${pps}\n**APM**: ${apm} (${efficiency})\n**VS**: ${vs}`, inline: true},
       // badge won't work for now, so just delete it for a moment
-      // { name: 'Solo Records', value: `**Sprint**: ${sprint}\n **Blitz**: ${blitz}\n **Badges**: ${badge}`, inline: true},
-      { name: 'Solo Records', value: `**Sprint**: ${sprint}\n **Blitz**: ${blitz}`, inline: true}, 
-      { name: 'Played Since', value: user.ts},
+      // { name: 'Solo Records', value: `**Sprint**: ${sprint}\n**Blitz**: ${blitz}\n**Badges**: ${badge}`, inline: true},
+      { name: 'Solo Records', value: `**Sprint**: ${sprint}\n**Blitz**: ${blitz}`, inline: true}, 
+      { name: 'Played Since', value: `${user.ts}`.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0]},
     )
   interaction.editReply({ embeds: [embed] });
 })

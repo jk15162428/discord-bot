@@ -8,7 +8,7 @@ const meta = new SlashCommandBuilder()
   .addStringOption((option) =>
     option
     .setName('term')
-    .setDescription('Provide the content you want to search for.')
+    .setDescription('Provides the search result you want to search for.')
     .setMinLength(1)
     .setMaxLength(200)
     .setRequired(true)
@@ -38,12 +38,12 @@ export default command(meta, async ({ interaction }) => {
         name: 'Rating',
         value: `${answer1.thumbs_up} thumbs up. ${answer1.thumbs_down} thumbs down.`,
       },
-      { name: 'Definition2', value: trim(answer2.definition, 1024) },
-      { name: 'Example2', value: trim(answer2.example, 1024) },
-      {
-        name: 'Rating2',
-        value: `${answer2.thumbs_up} thumbs up. ${answer2.thumbs_down} thumbs down.`,
-      },
+      // { name: 'Definition2', value: trim(answer2.definition, 1024) },
+      // { name: 'Example2', value: trim(answer2.example, 1024) },
+      // {
+      //   name: 'Rating2',
+      //   value: `${answer2.thumbs_up} thumbs up. ${answer2.thumbs_down} thumbs down.`,
+      // },
     );
   interaction.editReply({ embeds: [embed] });
 })

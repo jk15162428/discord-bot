@@ -17,7 +17,7 @@ export default command(meta, ({ interaction }) => {
   const message = interaction.options.getString('message')
 
   return interaction.reply({
-    ephemeral: true,
+    // ephemeral: true,
     content: message ?? 'Pong! :ping_pong:'
   })
 })

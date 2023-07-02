@@ -7,7 +7,7 @@ const meta = new SlashCommandBuilder()
 
 export default command(meta, ({ interaction }) => {
   return interaction.reply({
-    ephemeral: true,
+    // ephemeral: true,
     content: `This server is ${interaction!.guild!.name} and has ${interaction!.guild!.memberCount} members.`
   })
 })
