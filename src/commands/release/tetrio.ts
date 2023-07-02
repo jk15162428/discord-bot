@@ -97,7 +97,7 @@ export default command(meta, async ({ interaction }) => {
   const embed = new EmbedBuilder()
     .setAuthor({name: "Tetr.io", iconURL: "https://cdn.discordapp.com/emojis/676945644014927893.png?v=1"})
     .setThumbnail(avatarURL)
-    .setColor(0xBBE62E)
+    .setColor(0xBBE62E) // grass green
     .setTitle(User)
     .setURL(permalink)
     .addFields(

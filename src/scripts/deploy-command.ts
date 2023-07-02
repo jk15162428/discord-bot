@@ -23,6 +23,8 @@ async function main() {
 
   await rest.put(endpoint, { body })
 
+  console.log(`Successfully reloaded ${body.length} application (/) commands.`)
+
   return currentUser
 }
 

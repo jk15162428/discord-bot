@@ -28,7 +28,7 @@ export default command(meta, async ({ interaction }) => {
   
   const [answer1, answer2] = list;
   const embed = new EmbedBuilder()
-    .setColor(0xEFFF00)
+    .setColor(0xFFFF00) // yellow
     .setTitle(answer1.word)
     .setURL(answer1.permalink)
     .addFields(

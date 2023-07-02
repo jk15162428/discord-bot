@@ -63,7 +63,7 @@ export default command(meta, async ({ interaction }) => {
       const updated_at = data.updated_at
 
       const Embed = new EmbedBuilder()
-          .setColor('#1f2328')
+          .setColor('#1f2328') // github icon color: black
           .setTitle(`GitHub User Info - ${username}`)
           .setURL(html_url)
           .setThumbnail(avatar_url)
@@ -71,18 +71,27 @@ export default command(meta, async ({ interaction }) => {
               {name: 'Username', value: `${username}`, inline: true},
               {name: 'Name', value: `${name}`, inline: true},
               {name: 'ID', value: `${id}`, inline: true},
+          )
+          .addFields(
               {name: 'Type', value: `${type}`, inline: true},
               {name: 'Location', value: `${location}`, inline: true},
               {name: 'Company', value: `${company}`, inline: true},
+          )
+          .addFields(
               {name: 'Bio', value: `${bio}`},
               {name: 'Website', value: `${website}`},
+          )
+          .addFields(
               {name: 'Repos', value: `${repos}`, inline: true},
               {name: 'Gists', value: `${gists}`, inline: true},
+          )
+          .addFields(
               {name: 'Followers', value: `${followers}`, inline: true},
               {name: 'Following', value: `${following}`, inline: true},
+          )
+          .addFields(
               {name: 'Updated', value: `${updated_at}`.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0], inline: true},
               {name: 'Joined', value: `${created_at}`.replace(/T/, ' ').replace(/\..+/, '').split(' ')[0], inline: true},
-
           )
           // .setFooter({ text: 'Made by LachlanDev#8014', iconURL: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'}); 
       interaction.editReply({ embeds: [Embed] });
