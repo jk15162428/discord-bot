@@ -13,6 +13,13 @@ const meta = new SlashCommandBuilder()
     .setMaxLength(200)
     .setRequired(true)
   )
+  .addNumberOption((option) => 
+    option
+    .setName('number')
+    .setDescription('Displays specified number of definitions.')
+    .setMinValue(0)
+    .setMaxValue(100)
+  )
 
 const trim = (str: string, max: number) => (str.length > max ? `${str.slice(0, max - 3)}...` : str);
 
@@ -26,24 +33,25 @@ export default command(meta, async ({ interaction }) => {
     return interaction.editReply(`No results found for **${term}**.`);
   }
   
-  const [answer1, answer2] = list;
-  const embed = new EmbedBuilder()
+  let number = interaction.options.getNumber('number') as number;
+  if (number == undefined) number = 1;
+
+  if (number > list.length) number = list.length;
+  let embed = new EmbedBuilder()
     .setColor(0xFFFF00) // yellow
-    .setTitle(answer1.word)
-    .setURL(answer1.permalink)
+    .setAuthor({name: "Urban Dictionary", iconURL: "https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.urbandictionary.com/&size=48"})
+    .setTitle(list[0].word)
+    .setURL(list[0].permalink);
+  for(let i = 0; i < number; i++) {
+    embed
     .addFields(
-      { name: 'Definition', value: trim(answer1.definition, 1024) },
-      { name: 'Example', value: trim(answer1.example, 1024) },
+      { name: 'Definition'+(i + 1).toString(), value: trim(list[i].definition, 1024) },
+      { name: 'Example'+(i + 1).toString(), value: trim(list[i].example, 1024) },
       {
-        name: 'Rating',
-        value: `${answer1.thumbs_up} thumbs up. ${answer1.thumbs_down} thumbs down.`,
-      },
-      // { name: 'Definition2', value: trim(answer2.definition, 1024) },
-      // { name: 'Example2', value: trim(answer2.example, 1024) },
-      // {
-      //   name: 'Rating2',
-      //   value: `${answer2.thumbs_up} thumbs up. ${answer2.thumbs_down} thumbs down.`,
-      // },
-    );
+        name: 'Rating'+(i + 1).toString(),
+        value: `${list[i].thumbs_up} thumbs up. ${list[i].thumbs_down} thumbs down.`,
+      });
+  }
+
   interaction.editReply({ embeds: [embed] });
 })

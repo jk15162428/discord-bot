@@ -14,7 +14,6 @@ export function command(meta: CommandMeta, exec: CommandExec): Command {
 }
 
 export function category(name: string, commands: Command[], extra: CommandCategoryExtra = {}): CommandCategory {
-  console.log(extra.description)
   return {
     name,
     commands,
