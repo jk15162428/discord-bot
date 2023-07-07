@@ -17,21 +17,24 @@ const meta = new SlashCommandBuilder()
   
 
 export default command(meta, async ({ interaction }) => {
+  if (interaction.guild == undefined) {
+    return interaction.reply({ content: 'Something was wrong. :('})
+  }
   switch(interaction.options.getSubcommand()) {
     case 'server':
       return interaction.reply({
-        content: `This server is ${interaction!.guild!.name} and has ${interaction!.guild!.memberCount} members.`
+        content: `This server is ${interaction.guild.name} and has ${interaction.guild.memberCount} members.`
       })
     case 'user':
       let user = interaction.options.getUser('target') as User;
       let guildUser: GuildMember | undefined;
-      if (user) guildUser = interaction!.guild!.members.cache.get(user.id);
-      else { guildUser = interaction!.member as GuildMember; user = guildUser.user }
+      if (user) guildUser = interaction.guild.members.cache.get(user.id);
+      else { guildUser = interaction.member as GuildMember; user = guildUser.user }
       if (!guildUser) {
         return interaction.reply({ content: 'Cannot find user **${user}**. Something was wrong. :('})
       }
       const name = guildUser.nickname ? guildUser.nickname : guildUser.user.username
-
+      let joinedAt = guildUser.joinedAt == null ? new Date('N/A'): guildUser.joinedAt
       const embed = new EmbedBuilder()
         .setColor(0x00ff00) // green
         .setAuthor({
@@ -42,7 +45,7 @@ export default command(meta, async ({ interaction }) => {
         { name: 'Is Bot', value: user.bot.toString(), inline: true },
       )
         .addFields(
-        { name: 'Joined Server', value: guildUser!.joinedAt!.toLocaleDateString(), inline: false },
+        { name: 'Joined Server', value: joinedAt.toLocaleDateString(), inline: false },
         { name: 'Joined Discord', value: user.createdAt.toLocaleDateString(), inline: true },
       )
       return interaction.reply({ embeds: [embed] });
