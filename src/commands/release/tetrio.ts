@@ -20,7 +20,8 @@ export default command(meta, async ({ interaction }) => {
   await interaction.deferReply();
   const userName = interaction.options.getString('username')!.toLowerCase() as string;
   const userResult = await request(`https://ch.tetr.io/api/users/${userName}`);
-  let { success, error, data } = await userResult.body.json();
+  let { success, error, data } = await userResult.body.json() as {success: boolean, error: string, data: any};
+  
   if (!success) {
     return interaction.editReply(`No results found for user: **${userName}**.\nError: ${error}`);
   }
@@ -75,7 +76,7 @@ export default command(meta, async ({ interaction }) => {
   // let blitz = ""
 
   const recordResult = await request(`https://ch.tetr.io/api/users/${userName}/records`);
-  ({ success, data } = await recordResult.body.json());
+  ({ success, data } = await recordResult.body.json() as {success: boolean, data: any});
   let sprint = "", blitz = "", record = data.records
   if (!success) {
     sprint = `cannot found sprint record for user: **${userName}**`;

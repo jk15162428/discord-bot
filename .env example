@@ -1,0 +1,3 @@
+CLIENT_TOKEN="your bot token"
+SERVER_GUILD="the server you want to deploy on when you use /deploy rather than /deploy-all"
+USER_GUILD="not used"

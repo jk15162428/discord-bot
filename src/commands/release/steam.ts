@@ -11,7 +11,7 @@ const meta = new SlashCommandBuilder()
 export default command(meta, async ({ interaction }) => {
   await interaction.deferReply();
   const result = await request(`https://steam.seewang.me/api`);
-  let data = await result.body.json()
+  let data = await result.body.json() as any
   const { original, sale, created_at } = data[0];
 
   const Embed = new EmbedBuilder()

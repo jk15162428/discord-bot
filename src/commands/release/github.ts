@@ -33,7 +33,7 @@ export default command(meta, async ({ interaction }) => {
 
   let data;
   try {
-    data = await userResult.body.json();
+    data = await userResult.body.json() as any;
   } 
   catch (e) {
     interaction.editReply(`Something was wrong`);

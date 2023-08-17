@@ -10,7 +10,7 @@ export default command(meta, async ({ interaction }) => {
   await interaction.deferReply();
   try {
     const catResult = await request('http://aws.random.cat/meow'); // this API serves over 5 million requests a month
-    const { file } = await catResult.body.json();
+    const { file } = await catResult.body.json() as any;
     interaction.editReply({ files: [{ attachment: file, name: 'cat.png' }] });
   }
   catch {

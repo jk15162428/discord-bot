@@ -28,7 +28,7 @@ export default command(meta, async ({ interaction }) => {
   const term = interaction.options.getString('term') as string;
   const query = new URLSearchParams({term});
   const dictResult = await request(`https://api.urbandictionary.com/v0/define?${query}`);
-  const { list } = await dictResult.body.json();
+  const { list } = await dictResult.body.json() as any;
   if (!list.length) {
     return interaction.editReply(`No results found for **${term}**.`);
   }
