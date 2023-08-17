@@ -47,7 +47,7 @@ export default command(meta, async ({ interaction }) => {
   let badge = ""
   if (user.badges.length != 0)
     badge = badges(user.badges)
-  let bestRank = "", currentRank = "", currentRating = "", standingGlobal = "", standingLocal = "", pps = "", apm = "", vs = "", efficiency = "";
+  let bestRank = "", currentRank = "", currentRating = "", standingGlobal = "", standingLocal = "", pps = "", apm = "", vs = "", efficiency = "", vsEfficiency = "", downstackEfficiency = "";
   if (user.league.gamesplayed > 10) {
     bestRank = rank(user.league.bestrank);
     currentRank = rank(user.league.rank);
@@ -57,6 +57,9 @@ export default command(meta, async ({ interaction }) => {
     apm = user.league.apm.toString();
     vs = user.league.vs.toString();
     efficiency = (user.league.apm / (user.league.pps * 60 / 2.5)).toFixed(2).toString() + "x";
+    // VS / 100 * 60 / 24 / pps  -> VS efficiency = attack efficiency + downstack efficiency
+    vsEfficiency = (user.league.vs / 100 * 60 / 24 / user.league.pps).toFixed(2).toString() + "x";
+    downstackEfficiency = ((user.league.vs / 100 * 60 / 24 / user.league.pps) - (user.league.apm / (user.league.pps * 60 / 2.5))).toFixed(2).toString() + "x";
   } else {
     bestRank = rank(user.league.bestrank);
     currentRank = rank(user.league.rank);
@@ -70,6 +73,7 @@ export default command(meta, async ({ interaction }) => {
 
   // let sprint = ""
   // let blitz = ""
+
   const recordResult = await request(`https://ch.tetr.io/api/users/${userName}/records`);
   ({ success, data } = await recordResult.body.json());
   let sprint = "", blitz = "", record = data.records
@@ -102,7 +106,7 @@ export default command(meta, async ({ interaction }) => {
     .setURL(permalink)
     .addFields(
       { name: 'Tetra League', value: `Best rank: ${bestRank}, Current rank: ${currentRank} with :globe_with_meridians: ${standingGlobal} / ${nations}: ${standingLocal}`},
-      { name: 'Statistics', value: `**PPS**: ${pps}\n**APM**: ${apm} (${efficiency})\n**VS**: ${vs}`, inline: true},
+      { name: 'Statistics', value: `**PPS**: ${pps}\n**APM**: ${apm} (${efficiency})\n**VS**: ${vs} (${vsEfficiency})\n**Downstack**: ${downstackEfficiency}`, inline: true},
       // badge won't work for now, so just delete it for a moment
       // { name: 'Solo Records', value: `**Sprint**: ${sprint}\n**Blitz**: ${blitz}\n**Badges**: ${badge}`, inline: true},
       { name: 'Solo Records', value: `**Sprint**: ${sprint}\n**Blitz**: ${blitz}`, inline: true}, 
