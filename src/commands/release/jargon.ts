@@ -96,9 +96,8 @@ export default command(meta, async ({ interaction }) => {
     list[i].definition = Definition.split("|||||")[i];
     list[i].example = Example.split("|||||")[i];
   }
-  // TODO: replace embad
   let embed = new EmbedBuilder()
-    .setColor(0xFFFF00) // yellow
+    .setColor(0xCDE2B8) // grey green
     .setAuthor({name: "Jargon Translation"})
     .setTitle(list[0].word)
     .setURL(list[0].permalink);
