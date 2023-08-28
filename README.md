@@ -4,8 +4,10 @@ This bot is implemented with TypeScript and Discord.js. It integrates Urban Dict
 ### Installation
 First, clone this repository:
 `git clone git@github.com:jk15162428/discord-bot.git`
+
 Then, install dependencies:
 `npm install`
+
 Okay you're done, you can try `npm run build` to check if everything is fine.
 
 ### Usage
