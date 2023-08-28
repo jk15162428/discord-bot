@@ -6,6 +6,7 @@ import github from './github';
 import help from './help';
 import translate from './translate';
 import steam from './steam';
+import jargon from './jargon';
 
 export default category('Release', [
   help,
@@ -15,6 +16,7 @@ export default category('Release', [
   github,
   translate,
   steam,
+  jargon,
 ], {
   description: 'These commands are for regular use.',
   emoji: '💚'
